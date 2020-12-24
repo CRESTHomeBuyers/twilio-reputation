@@ -23,7 +23,7 @@ print "Starting: Twilio Phone Number Reputation Monitoring Tool..."
 #print "Twilio Token: %s" % twilio_token
 print "Numbers: %s" % numbers
 
-addons = ["nomorobo_spamscore", "marchex_cleancall", "icehook_scout"]
+addons = ["nomorobo_spamscore", "icehook_scout"]
 
 number_list = numbers.split(",")
 
@@ -47,14 +47,7 @@ for number in number_list:
                 print "\t\t***ALERT***: NOMOROBO IDENTIFIED %s AS SPAM." % (number)
                 if number not in spam_list:
                     spam_list.append(number)
-        if addon == "marchex_cleancall":
-            score = j["add_ons"]["results"][addon]["result"]["result"]["recommendation"]
-            score_text = "\t\tMarchex Recommendation: %s" % score
-            print score_text
-            if score == "FAIL":
-                print "\t\t***ALERT***: MARCHEX IDENTIFIED %s AS SPAM." % (number)
-                if number not in spam_list:
-                    spam_list.append(number)
+
         if addon == "icehook_scout":
 
             score = j["add_ons"]["results"][addon]["result"]["risk_rating"]
